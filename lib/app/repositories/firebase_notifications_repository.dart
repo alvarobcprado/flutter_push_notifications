@@ -1,19 +1,28 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_push_notifications/app/models/app_message.dart';
 import 'package:flutter_push_notifications/app/repositories/notifications_repository.dart';
 
+@pragma('vm:entry-point')
+Future<void> _backgroundMessageHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  final appMessage = AppMessage.fromMap(message.toMap());
+  await FirebaseNotificationsRepository._onBackgroundMessage?.call(appMessage);
+}
+
 class FirebaseNotificationsRepository extends NotificationsRepository {
   const FirebaseNotificationsRepository();
+
+  static AppMessageCallback? _onBackgroundMessage;
 
   @override
   Future<void> listenToBackgroundMessage(
     AppMessageCallback onBackgrounMessage,
   ) async {
-    FirebaseMessaging.onBackgroundMessage((message) async {
-      await _processMessage(message, onBackgrounMessage);
-    });
+    _onBackgroundMessage = onBackgrounMessage;
+    FirebaseMessaging.onBackgroundMessage(_backgroundMessageHandler);
   }
 
   @override
@@ -35,7 +44,7 @@ class FirebaseNotificationsRepository extends NotificationsRepository {
     }
   }
 
-  Future<void> _processMessage(
+  static Future<void> _processMessage(
     RemoteMessage message,
     AppMessageCallback onMessage,
   ) async {

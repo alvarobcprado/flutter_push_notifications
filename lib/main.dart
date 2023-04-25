@@ -6,6 +6,7 @@ import 'package:flutter_push_notifications/di.dart';
 import 'package:flutter_push_notifications/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final messaging = FirebaseMessaging.instance;
   messaging.getToken().then((value) => print(value));
