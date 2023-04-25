@@ -1,12 +1,13 @@
 name: flutter_push_notifications
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.3 <3.0.0'
+  sdk: ">=2.19.3 <3.0.0"
 
 dependencies:
+  auto_injector: ^1.0.2+2
   firebase_core: ^2.10.0
   firebase_messaging: ^14.4.1
   flutter:
