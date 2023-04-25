@@ -2,24 +2,24 @@ import 'package:flutter_push_notifications/app/models/app_notification.dart';
 
 class AppMessage {
   const AppMessage({
-    this.message,
+    this.notification,
     required this.data,
   });
 
-  final AppNotification? message;
+  final AppNotification? notification;
   final Map<String, dynamic> data;
 
   Map<String, dynamic> toMap() {
     return {
-      'message': message?.toMap(),
+      'notification': notification?.toMap(),
       'data': data,
     };
   }
 
   factory AppMessage.fromMap(Map<String, dynamic> map) {
     return AppMessage(
-      message: map['message'] != null
-          ? AppNotification.fromMap(map['message'])
+      notification: map['notification'] != null
+          ? AppNotification.fromMap(map['notification'])
           : null,
       data: Map<String, dynamic>.from(map['data']),
     );

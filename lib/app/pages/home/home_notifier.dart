@@ -18,17 +18,17 @@ class HomeNotifier extends ReStateEvent<HomeState, HomeEvent> {
       [
         _notificationsRepository.listenToBackgroundMessage(
           (message) async {
-            print('Background message: $message');
+            print('Background message: ${message.toMap()}');
           },
         ),
         _notificationsRepository.listenToForegroundMessage(
           (message) async {
-            print('Foreground message: $message');
+            print('Foreground message: ${message.toMap()}');
           },
         ),
         _notificationsRepository.handleInitialMessage(
           (message) async {
-            print('Initial message: $message');
+            print('Initial message: ${message.toMap()}');
           },
         )
       ],
