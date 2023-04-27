@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_push_notifications/app/pages/home/home_page.dart';
-import 'package:flutter_push_notifications/app/services/firebase_service.dart';
 import 'package:flutter_push_notifications/app/services/onesignal_service.dart';
 import 'package:flutter_push_notifications/di.dart';
 
@@ -8,7 +7,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Future.wait([
     OnesignalService.init(),
-    FirebaseService.init(),
+    // FirebaseService.init(),
   ]);
   runApp(const MainApp());
 }
