@@ -12,6 +12,7 @@ dependencies:
   firebase_messaging: ^14.4.1
   flutter:
     sdk: flutter
+  onesignal_flutter: ^3.5.1
   re_state_action: ^0.0.10
 
 dev_dependencies:
